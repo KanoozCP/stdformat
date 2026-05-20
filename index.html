@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Standard Formats - Central Planning Portal</title>
+    
+    <!-- Modern Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    
+    <!-- Tailwind CSS 4 -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <style>
+        :root {
+            --kcp-indigo: #1e3a8a;
+            --kcp-blue: #2563eb;
+            --kcp-orange: #f97316;
+            --kcp-gradient: linear-gradient(135deg, #1e3a8a, #2563eb, #f97316);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f8fafc;
+            color: #0f172a;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Poppins', sans-serif;
+        }
+
+        @keyframes kcpGrad {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+
+        .animate-kcp-gradient {
+            background: var(--kcp-gradient);
+            background-size: 200% 200%;
+            animation: kcpGrad 6s ease infinite;
+        }
+
+        .glass-header {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+
+        .header-hidden {
+            transform: translateY(-100%);
+        }
+
+        .format-card {
+            background: rgba(255, 255, 255, 0.4);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(241, 245, 249, 0.8);
+            border-radius: 2rem;
+            padding: 2rem;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .format-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 30px -10px rgba(0,0,0,0.08);
+            background: rgba(255, 255, 255, 0.65);
+            border-color: rgba(37, 99, 235, 0.2);
+        }
+
+        .icon-box {
+            width: 3rem;
+            height: 3rem;
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: inset 0 1px 1px rgba(255,255,255,0.8);
+        }
+
+        @keyframes spinner {
+            to { transform: rotate(360deg); }
+        }
+        .spinner {
+            width: 1.125rem;
+            height: 1.125rem;
+            border: 2px solid rgba(37, 99, 235, 0.1);
+            border-top-color: #2563eb;
+            border-radius: 50%;
+            animation: spinner 0.6s linear infinite;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Background Elements -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.05] flex items-center justify-center">
+        <img src="https://lh3.googleusercontent.com/d/1oQr4RoR9ON5vK6U_oIN2hW0HdnpEloO8" alt="Watermark" class="w-[600px] max-w-[80vw] select-none">
+    </div>
+
+    <!-- Header -->
+    <header id="mainHeader" class="glass-header">
+        <div class="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
+            <a href="https://kanooz.com/" target="_blank" class="flex items-center gap-4 group">
+                <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz Logo" class="h-10 md:h-14 transition-transform group-hover:scale-105">
+            </a>
+
+            <div class="absolute left-1/2 -translate-x-1/2">
+                <div class="animate-kcp-gradient p-[1px] rounded-2xl shadow-xl">
+                    <div class="bg-white/10 backdrop-blur-xl px-4 md:px-10 py-3 rounded-[15px] border border-white/20 text-center">
+                        <h1 class="text-white font-extrabold text-sm md:text-xl tracking-tight uppercase whitespace-nowrap">
+                            Central Planning Portal
+                        </h1>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Header Home Link -->
+            <div>
+                <a href="https://kanoozcp.github.io/" class="inline-flex items-center gap-2 px-3.5 py-1.5 md:px-4 md:py-2 border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-blue-600 transition-all rounded-xl text-xs md:text-sm font-bold shadow-sm">
+                    <i data-lucide="home" style="width:16px;height:16px"></i>
+                    <span class="hidden md:inline">Home</span>
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="max-w-7xl mx-auto px-6 py-8 md:py-12 relative z-10">
+        
+        <!-- Welcome Section -->
+        <section class="mb-12 animate-fade-in text-left">
+            <div>
+                <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-2">
+                    Standard <span class="text-blue-600">Formats</span>
+                </h2>
+                <p class="text-slate-500 text-base max-w-lg leading-snug font-medium">
+                    Download templates for MP Request, EQ Request & Others.
+                </p>
+            </div>
+        </section>
+
+        <!-- List Layout (Each in Line) -->
+        <div class="flex flex-col gap-4">
+            
+            <!-- Format: Manpower Request -->
+            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 p-5 sm:p-6" style="border-radius:1.5rem">
+                <!-- Left side -->
+                <div class="flex items-start gap-4 flex-1">
+                    <div class="icon-box bg-blue-50 text-blue-600 shrink-0">
+                        <i data-lucide="users" style="width:20px;height:20px animate-pulse"></i>
+                    </div>
+                    <div style="text-align:left">
+                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug group-hover:text-blue-600 transition-colors">
+                            Manpower Request (MP Request)
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-2xl mt-1">
+                            Use this standardized form to submit manpower requirements, staff allocations, or crew mobilization requests for your project locations.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- PDF & Soft Copy buttons side-by-side -->
+                <div class="grid grid-cols-2 md:flex items-center gap-3 shrink-0 w-full md:w-auto">
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-text" style="width:16px;height:16px" class="text-rose-500"></i>
+                        <span>PDF Format</span>
+                    </a>
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-spreadsheet" style="width:16px;height:16px" class="text-emerald-500"></i>
+                        <span>Soft Copy</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Format: Equipment Request -->
+            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 p-5 sm:p-6" style="border-radius:1.5rem">
+                <!-- Left side -->
+                <div class="flex items-start gap-4 flex-1">
+                    <div class="icon-box bg-amber-50 text-amber-600 shrink-0">
+                        <i data-lucide="truck" style="width:20px;height:20px"></i>
+                    </div>
+                    <div style="text-align:left">
+                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug group-hover:text-amber-600 transition-colors">
+                            Equipment Request (EQ Request)
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-2xl mt-1">
+                            Use this format to request machinery, specialized tooling, heavy vehicles, or site equipment allocations for project execution.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- PDF & Soft Copy buttons side-by-side -->
+                <div class="grid grid-cols-2 md:flex items-center gap-3 shrink-0 w-full md:w-auto">
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-text" style="width:16px;height:16px" class="text-rose-500"></i>
+                        <span>PDF Format</span>
+                    </a>
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-spreadsheet" style="width:16px;height:16px" class="text-emerald-500"></i>
+                        <span>Soft Copy</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Format: Monthly Manhours Format -->
+            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 p-5 sm:p-6" style="border-radius:1.5rem">
+                <!-- Left side -->
+                <div class="flex items-start gap-4 flex-1">
+                    <div class="icon-box bg-emerald-50 text-emerald-600 shrink-0">
+                        <i data-lucide="calendar" style="width:20px;height:20px"></i>
+                    </div>
+                    <div style="text-align:left">
+                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug group-hover:text-emerald-600 transition-colors">
+                            Monthly Manhours Format
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-2xl mt-1">
+                            Standard format to record and report project monthly worked manhours, supervisor logs, and workforce summaries.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- PDF & Soft Copy buttons side-by-side -->
+                <div class="grid grid-cols-2 md:flex items-center gap-3 shrink-0 w-full md:w-auto">
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-text" style="width:16px;height:16px" class="text-rose-500"></i>
+                        <span>PDF Format</span>
+                    </a>
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-spreadsheet" style="width:16px;height:16px" class="text-emerald-500"></i>
+                        <span>Soft Copy</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Format: Mobilization & Others -->
+            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 p-5 sm:p-6" style="border-radius:1.5rem">
+                <!-- Left side -->
+                <div class="flex items-start gap-4 flex-1">
+                    <div class="icon-box bg-purple-50 text-purple-600 shrink-0">
+                        <i data-lucide="layers" style="width:20px;height:20px"></i>
+                    </div>
+                    <div style="text-align:left">
+                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug group-hover:text-purple-600 transition-colors">
+                            Mobilization & Others
+                        </h3>
+                        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-2xl mt-1">
+                            Standard planning forms and checklist documents for site onboarding, induction logs, and related planning coordinates.
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- PDF & Soft Copy buttons side-by-side -->
+                <div class="grid grid-cols-2 md:flex items-center gap-3 shrink-0 w-full md:w-auto">
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-text" style="width:16px;height:16px" class="text-rose-500"></i>
+                        <span>PDF Format</span>
+                    </a>
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-spreadsheet" style="width:16px;height:16px" class="text-emerald-500"></i>
+                        <span>Soft Copy</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Submission guidelines -->
+        <div class="mt-12 flex items-start gap-4 p-5 bg-blue-50/50 border border-blue-100 rounded-[2rem]">
+            <i data-lucide="info" class="w-5 h-5 text-blue-600 shrink-0 mt-0.5 animate-bounce"></i>
+            <div>
+                <p class="text-xs font-bold text-blue-900 uppercase tracking-wider mb-1 text-left">Submission Guidelines:</p>
+                <p class="text-[11px] text-blue-700 leading-normal text-left">
+                    Please download, fill out, and secure approvals for the appropriate formats before submitting them to Central Planning via the <strong>Department Update</strong> portal or directly to the email.
+                </p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-12 border-t border-slate-200/60 bg-white/30 backdrop-blur-3xl relative z-10 w-full">
+        <div class="max-w-7xl mx-auto px-6 py-4 md:py-6">
+            <div class="flex flex-col md:flex-row items-center justify-between gap-4">
+                
+                <!-- Contact Icons Row -->
+                <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-3">
+                    <div class="flex items-center gap-2 group cursor-default">
+                        <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i>
+                        <span class="text-slate-600 font-medium text-[11px]">Dammam, KSA</span>
+                    </div>
+
+                    <a href="mailto:Info@kanooz.com" class="flex items-center gap-2 group">
+                        <i data-lucide="mail" class="w-3.5 h-3.5 text-blue-500"></i>
+                        <span class="text-slate-600 font-medium text-[11px] group-hover:text-blue-600 transition-colors">Info@kanooz.com</span>
+                    </a>
+
+                    <a href="tel:+96692000043" class="flex items-center gap-2 group">
+                        <i data-lucide="phone" class="w-3.5 h-3.5 text-emerald-500"></i>
+                        <span class="text-slate-600 font-medium text-[11px] group-hover:text-emerald-600 transition-colors">+966 92000043</span>
+                    </a>
+                </div>
+
+                <!-- Copyright & Logo -->
+                <div class="flex items-center gap-6">
+                    <div class="flex items-center gap-3">
+                        <p class="text-slate-400 text-[10px] font-medium select-none">
+                            © 2026 Kanooz Central Planning.
+                        </p>
+                        <span class="text-[8px] font-bold text-slate-300 uppercase tracking-[0.2em] px-2 py-0.5 border border-slate-200 rounded-full select-none">
+                            v1.0.0
+                        </span>
+                    </div>
+                    <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz" class="h-8 opacity-40 grayscale hover:grayscale-0 transition-opacity">
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Initialize Lucide Icons
+        lucide.createIcons();
+
+        // Card Loading Simulation
+        const buttons = document.querySelectorAll('.format-card a');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const icon = btn.querySelector('i');
+                if (icon) {
+                    icon.classList.add('animate-spin');
+                    setTimeout(() => {
+                        icon.classList.remove('animate-spin');
+                    }, 1000);
+                }
+            });
+        });
+
+        // Header scroll effect
+        let lastScroll = 0;
+        const header = document.getElementById('mainHeader');
+
+        window.addEventListener('scroll', () => {
+            const currentScroll = window.pageYOffset;
+            if (currentScroll <= 0) {
+                header.classList.remove('header-hidden');
+                return;
+            }
+
+            if (currentScroll > lastScroll && !header.classList.contains('header-hidden')) {
+                // Scroll down
+                header.classList.add('header-hidden');
+            } else if (currentScroll < lastScroll && header.classList.contains('header-hidden')) {
+                // Scroll up
+                header.classList.remove('header-hidden');
+            }
+            lastScroll = currentScroll;
+        });
+    </script>
+</body>
+</html>
