@@ -126,7 +126,7 @@
                 </div>
             </div>
 
-            <!-- Header Home Link -->
+            <!-- Standalone back button indicator -->
             <div>
                 <a href="https://kanoozcp.github.io/" class="inline-flex items-center gap-2 px-3.5 py-1.5 md:px-4 md:py-2 border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-blue-600 transition-all rounded-xl text-xs md:text-sm font-bold shadow-sm">
                     <i data-lucide="home" style="width:16px;height:16px"></i>
@@ -282,7 +282,7 @@
             <div>
                 <p class="text-xs font-bold text-blue-900 uppercase tracking-wider mb-1 text-left">Note:</p>
                 <p class="text-[11px] text-blue-700 leading-normal text-left">
-                    Please download, fill out, and secure approvals for the appropriate formats before submitting through email.
+                    Please download, fill out, and secure approvals for the appropriate formats before submitting them directly through email.
                 </p>
             </div>
         </div>
@@ -336,6 +336,7 @@
         const buttons = document.querySelectorAll('.format-card a');
         buttons.forEach(btn => {
             btn.addEventListener('click', (e) => {
+                // We let standard link click happen, but add some hover/click feedback
                 const icon = btn.querySelector('i');
                 if (icon) {
                     icon.classList.add('animate-spin');
