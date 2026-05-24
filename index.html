@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -140,7 +141,7 @@
     <main class="max-w-7xl mx-auto px-6 py-8 md:py-12 relative z-10">
         
         <!-- Welcome Section -->
-        <section class="mb-12 animate-fade-in text-left">
+        <section class="mb-12 animate-fade-in text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
             <div>
                 <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-2">
                     Standard <span class="text-blue-600">Formats</span>
@@ -149,10 +150,30 @@
                     Download templates for MP Request, EQ Request & Others.
                 </p>
             </div>
+
+            <!-- Search Bar Inner Right on Larger Screens, Full Width on Mobile -->
+            <div class="relative w-full md:max-w-md shrink-0">
+                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
+                    <i data-lucide="search" class="h-4 w-4 text-slate-400"></i>
+                </div>
+                <input type="text" id="searchInput" placeholder="Search templates (e.g., manpower, equipment, expense)..." class="block w-full pl-11 pr-10 py-3 bg-white border border-slate-200 rounded-2xl text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-blue-500/10 focus:border-blue-500 transition-all shadow-sm">
+                <button id="clearSearch" class="hidden absolute inset-y-0 right-0 pr-4 flex items-center hover:text-slate-600 text-slate-400 transition-colors">
+                    <i data-lucide="x" class="h-4 w-4"></i>
+                </button>
+            </div>
         </section>
 
+        <!-- Empty state element (Hidden by Default) -->
+        <div id="emptyState" class="hidden flex-col items-center justify-center py-16 text-center bg-white/40 backdrop-blur-xl border border-slate-200 rounded-[2rem] p-8 animate-fade-in mb-8">
+            <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-2xl flex items-center justify-center mb-3">
+                <i data-lucide="alert-circle" class="w-6 h-6"></i>
+            </div>
+            <h4 class="font-bold text-slate-900 text-base">No templates found</h4>
+            <p class="text-xs text-slate-500 mt-1">We couldn't find any templates matching your search criteria.</p>
+        </div>
+
         <!-- List Layout (Each in Line) -->
-        <div class="flex flex-col gap-4">
+        <div id="cardsContainer" class="flex flex-col gap-4">
             
             <!-- Format: Manpower Request -->
             <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 p-5 sm:p-6" style="border-radius:1.5rem">
@@ -184,7 +205,7 @@
                 </div>
             </div>
 
-                        <!-- Format: Local Hire Manpower Request -->
+            <!-- Format: Local Hire Manpower Request -->
             <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 p-5 sm:p-6" style="border-radius:1.5rem">
                 <!-- Left side -->
                 <div class="flex items-start gap-4 flex-1">
@@ -352,7 +373,9 @@
                             v1.0.0
                         </span>
                     </div>
-                    <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz" class="h-8 opacity-40 grayscale hover:grayscale-0 transition-opacity">
+                    <a href="https://kanooz-central-planning-35103598616.asia-south1.run.app/" target="_blank" rel="noopener noreferrer" class="inline-block">
+                        <img src="https://kanooz.com/assets/images/logo.png" alt="Kanooz" class="h-8 opacity-40 grayscale hover:grayscale-0 transition-opacity">
+                    </a>
                 </div>
             </div>
         </div>
@@ -361,6 +384,61 @@
     <script>
         // Initialize Lucide Icons
         lucide.createIcons();
+
+        // Search functionality
+        const searchInput = document.getElementById('searchInput');
+        const clearSearch = document.getElementById('clearSearch');
+        const formatCards = document.querySelectorAll('.format-card');
+        const emptyState = document.getElementById('emptyState');
+        const cardsContainer = document.getElementById('cardsContainer');
+
+        searchInput.addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase().trim();
+            let matches = 0;
+
+            if (query.length > 0) {
+                clearSearch.classList.remove('hidden');
+            } else {
+                clearSearch.classList.add('hidden');
+            }
+
+            formatCards.forEach(card => {
+                const titleText = card.querySelector('h3').textContent.toLowerCase();
+                const descText = card.querySelector('p').textContent.toLowerCase();
+                
+                if (titleText.includes(query) || descText.includes(query)) {
+                    card.classList.remove('hidden');
+                    card.classList.add('flex');
+                    matches++;
+                } else {
+                    card.classList.add('hidden');
+                    card.classList.remove('flex');
+                }
+            });
+
+            if (matches === 0) {
+                emptyState.classList.remove('hidden');
+                emptyState.classList.add('flex');
+                cardsContainer.classList.add('hidden');
+            } else {
+                emptyState.classList.add('hidden');
+                emptyState.classList.remove('flex');
+                cardsContainer.classList.remove('hidden');
+            }
+        });
+
+        clearSearch.addEventListener('click', () => {
+            searchInput.value = '';
+            clearSearch.classList.add('hidden');
+            emptyState.classList.add('hidden');
+            emptyState.classList.remove('flex');
+            cardsContainer.classList.remove('hidden');
+            formatCards.forEach(card => {
+                card.classList.remove('hidden');
+                card.classList.add('flex');
+            });
+            searchInput.focus();
+        });
 
         // Card Loading Simulation
         const buttons = document.querySelectorAll('.format-card a');
