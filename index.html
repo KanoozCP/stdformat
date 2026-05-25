@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -65,12 +64,13 @@
             background: rgba(255, 255, 255, 0.4);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(241, 245, 249, 0.8);
-            border-radius: 2rem;
-            padding: 2rem;
+            border-radius: 1rem;
+            padding: 0.625rem 1rem;
             transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            min-height: 0;
         }
 
         .format-card:hover {
@@ -81,9 +81,9 @@
         }
 
         .icon-box {
-            width: 3rem;
-            height: 3rem;
-            border-radius: 1rem;
+            width: 2.5rem;
+            height: 2.5rem;
+            border-radius: 0.75rem;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -121,7 +121,7 @@
                 <div class="animate-kcp-gradient p-[1px] rounded-2xl shadow-xl">
                     <div class="bg-white/10 backdrop-blur-xl px-4 md:px-10 py-3 rounded-[15px] border border-white/20 text-center">
                         <h1 class="text-white font-extrabold text-sm md:text-xl tracking-tight uppercase whitespace-nowrap">
-                            CENTRAL PLANNING PORTAL
+                            Central Planning Portal
                         </h1>
                     </div>
                 </div>
@@ -176,172 +176,198 @@
         <div id="cardsContainer" class="flex flex-col gap-4">
             
             <!-- Format: Manpower Request -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 p-5 sm:p-6" style="border-radius:1.5rem">
+            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
                 <!-- Left side -->
-                <div class="flex items-start gap-4 flex-1">
+                <div class="flex items-center gap-3 flex-1">
                     <div class="icon-box bg-blue-50 text-blue-600 shrink-0">
-                        <i data-lucide="users" style="width:20px;height:20px animate-pulse"></i>
+                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
                     </div>
                     <div style="text-align:left">
-                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug group-hover:text-blue-600 transition-colors">
+                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-blue-600 transition-colors">
                             Manpower Request
                         </h3>
-                        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-2xl mt-1">
-                            Use this form to submit overall manpower requirements or crew mobilization requests for your project.
-                        </p>
                     </div>
                 </div>
                 
                 <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-3 shrink-0 w-full md:w-auto">
-                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQDVHBwaZbhjS4TU_rlTtkIcAYRxUsO05EAlhIp-iRMsrkI?e=PCJxXy" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:16px;height:16px" class="text-rose-500"></i>
+                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
+                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQDVHBwaZbhjS4TU_rlTtkIcAYRxUsO05EAlhIp-iRMsrkI?e=PCJxXy" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
                         <span>PDF Format</span>
                     </a>
-                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQBGdLYzlJ79Qp1i9gWl6aAQAWRCgDTdEjJ83DjZiNhVnb4?e=ecRTh1" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:16px;height:16px" class="text-emerald-500"></i>
+                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQBGdLYzlJ79Qp1i9gWl6aAQAWRCgDTdEjJ83DjZiNhVnb4?e=ecRTh1" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
                         <span>Soft Copy</span>
                     </a>
                 </div>
             </div>
 
             <!-- Format: Local Hire Manpower Request -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 p-5 sm:p-6" style="border-radius:1.5rem">
+            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
                 <!-- Left side -->
-                <div class="flex items-start gap-4 flex-1">
+                <div class="flex items-center gap-3 flex-1">
                     <div class="icon-box bg-blue-50 text-blue-600 shrink-0">
-                        <i data-lucide="users" style="width:20px;height:20px animate-pulse"></i>
+                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
                     </div>
                     <div style="text-align:left">
-                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug group-hover:text-blue-600 transition-colors">
+                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-blue-600 transition-colors">
                             Local Hire Manpower Request
                         </h3>
-                        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-2xl mt-1">
-                            Use this form to submit local hire manpower requirements for your project.
-                        </p>
                     </div>
                 </div>
                 
                 <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-3 shrink-0 w-full md:w-auto">
-                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQC7E0HgLsfCTo5RoGVT3RRjAfR49wqtR_y7sD5t0vOVwjA?e=xISZW8" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:16px;height:16px" class="text-rose-500"></i>
+                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
+                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQC7E0HgLsfCTo5RoGVT3RRjAfR49wqtR_y7sD5t0vOVwjA?e=xISZW8" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
                         <span>PDF Format</span>
                     </a>
-                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQC8y4yJbkMIT7c7cS18p3RXASXQeS2yruKbUA7GCCtypio?e=lzLfTF" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:16px;height:16px" class="text-emerald-500"></i>
+                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQC8y4yJbkMIT7c7cS18p3RXASXQeS2yruKbUA7GCCtypio?e=lzLfTF" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
                         <span>Soft Copy</span>
                     </a>
                 </div>
             </div>
 
             <!-- Format: Equipment Request -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 p-5 sm:p-6" style="border-radius:1.5rem">
+            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
                 <!-- Left side -->
-                <div class="flex items-start gap-4 flex-1">
-                    <div class="icon-box bg-amber-50 text-amber-600 shrink-0">
-                        <i data-lucide="truck" style="width:20px;height:20px"></i>
+                <div class="flex items-center gap-3 flex-1">
+                    <div class="icon-box bg-blue-50 text-blue-600 shrink-0">
+                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
                     </div>
                     <div style="text-align:left">
-                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug group-hover:text-amber-600 transition-colors">
+                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-blue-600 transition-colors">
                             Equipment Request
                         </h3>
-                        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-2xl mt-1">
-                            Use this format to request machinery, specialized tooling, heavy vehicles, or site equipment allocations for your project.
-                        </p>
                     </div>
                 </div>
                 
                 <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-3 shrink-0 w-full md:w-auto">
-                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQBrvY84TDBmR62d_j9SFBCzAXDejqBOi87JAfXOpFZrf1A?e=nSa9lk" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:16px;height:16px" class="text-rose-500"></i>
+                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
+                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQBrvY84TDBmR62d_j9SFBCzAXDejqBOi87JAfXOpFZrf1A?e=nSa9lk" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
                         <span>PDF Format</span>
                     </a>
-                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQDubiuHghUlTaST3dD64yFgAci_HzYQIU0xiqozYmg-qco?e=7ZrW8p" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:16px;height:16px" class="text-emerald-500"></i>
+                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQDubiuHghUlTaST3dD64yFgAci_HzYQIU0xiqozYmg-qco?e=7ZrW8p" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
                         <span>Soft Copy</span>
                     </a>
                 </div>
             </div>
 
             <!-- Format: Expense Report -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 p-5 sm:p-6" style="border-radius:1.5rem">
+            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
                 <!-- Left side -->
-                <div class="flex items-start gap-4 flex-1">
-                    <div class="icon-box bg-emerald-50 text-emerald-600 shrink-0">
-                        <i data-lucide="calendar" style="width:20px;height:20px"></i>
+                <div class="flex items-center gap-3 flex-1">
+                    <div class="icon-box bg-blue-50 text-blue-600 shrink-0">
+                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
                     </div>
                     <div style="text-align:left">
-                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug group-hover:text-emerald-600 transition-colors">
+                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-blue-600 transition-colors">
                             Expense Report
                         </h3>
-                        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-2xl mt-1">
-                            Use this format to submit your expenses with bills for reimbursement.
-                        </p>
                     </div>
                 </div>
                 
                 <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-3 shrink-0 w-full md:w-auto">
-                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQAlYhlc9JtHS5aIefKilN3oAfUt6updHewtM4z6frITky4?e=EkVJhJ" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:16px;height:16px" class="text-rose-500"></i>
+                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
+                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQAlYhlc9JtHS5aIefKilN3oAfUt6updHewtM4z6frITky4?e=EkVJhJ" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
                         <span>PDF Format</span>
                     </a>
-                    <a href="https://kanooz365-my.sharepoint.com/:x:/g/personal/naved_kanooz_com/IQA-4U373ilvQ6U31fdsftsGAU3JqWZ_fVlZdGWWqoyCIgs?e=gHNbbM" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:16px;height:16px" class="text-emerald-500"></i>
+                    <a href="https://kanooz365-my.sharepoint.com/:x:/g/personal/naved_kanooz_com/IQA-4U373ilvQ6U31fdsftsGAU3JqWZ_fVlZdGWWqoyCIgs?e=gHNbbM" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
                         <span>Soft Copy</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Format: Mobilization & Others -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-4 md:gap-8 p-5 sm:p-6" style="border-radius:1.5rem">
+            <!-- Format: Others -->
+            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
                 <!-- Left side -->
-                <div class="flex items-start gap-4 flex-1">
-                    <div class="icon-box bg-purple-50 text-purple-600 shrink-0">
-                        <i data-lucide="layers" style="width:20px;height:20px"></i>
+                <div class="flex items-center gap-3 flex-1">
+                    <div class="icon-box bg-blue-50 text-blue-600 shrink-0">
+                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
                     </div>
                     <div style="text-align:left">
-                        <h3 class="font-extrabold text-slate-900 text-base sm:text-lg leading-snug group-hover:text-purple-600 transition-colors">
+                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-blue-600 transition-colors">
                             To be added Soon
                         </h3>
-                        <p class="text-xs sm:text-sm text-slate-500 leading-relaxed max-w-2xl mt-1">
-                            Description here
-                        </p>
                     </div>
                 </div>
                 
                 <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-3 shrink-0 w-full md:w-auto">
-                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:16px;height:16px" class="text-rose-500"></i>
+                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
                         <span>PDF Format</span>
                     </a>
-                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-2 py-3 px-4 md:w-36 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:16px;height:16px" class="text-emerald-500"></i>
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
                         <span>Soft Copy</span>
                     </a>
                 </div>
             </div>
 
-        </div>
-
-        <!-- Submission guidelines -->
-        <div class="mt-12 flex items-start gap-4 p-5 bg-blue-50/50 border border-blue-100 rounded-[2rem]">
-            <i data-lucide="info" class="w-5 h-5 text-blue-600 shrink-0 mt-0.5 animate-bounce"></i>
-            <div>
-                <p class="text-xs font-bold text-blue-900 uppercase tracking-wider mb-1 text-left">Note:</p>
-                <p class="text-[11px] text-blue-700 leading-normal text-left">
-                    Please download, fill out, and secure approvals for the appropriate formats before submitting them directly or through the email.
-                </p>
+            <!-- Format: Others -->
+            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
+                <!-- Left side -->
+                <div class="flex items-center gap-3 flex-1">
+                    <div class="icon-box bg-blue-50 text-blue-600 shrink-0">
+                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
+                    </div>
+                    <div style="text-align:left">
+                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-blue-600 transition-colors">
+                            To be added Soon
+                        </h3>
+                    </div>
+                </div>
+                
+                <!-- PDF & Soft Copy buttons side-by-side -->
+                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
+                        <span>PDF Format</span>
+                    </a>
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
+                        <span>Soft Copy</span>
+                    </a>
+                </div>
+            </div>
+            <!-- Format: Others -->
+            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
+                <!-- Left side -->
+                <div class="flex items-center gap-3 flex-1">
+                    <div class="icon-box bg-blue-50 text-blue-600 shrink-0">
+                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
+                    </div>
+                    <div style="text-align:left">
+                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-blue-600 transition-colors">
+                            To be added Soon
+                        </h3>
+                    </div>
+                </div>
+                
+                <!-- PDF & Soft Copy buttons side-by-side -->
+                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
+                        <span>PDF Format</span>
+                    </a>
+                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
+                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
+                        <span>Soft Copy</span>
+                    </a>
+                </div>
             </div>
         </div>
 
     </main>
 
-    <!-- Footer -->
-    <footer class="mt-12 border-t border-slate-200/60 bg-white/30 backdrop-blur-3xl relative z-10 w-full">
+    <!-- Reduced Footer -->
+    <footer class="mt-8 border-t border-slate-200/60 bg-white/30 backdrop-blur-3xl relative z-10 w-full">
         <div class="max-w-7xl mx-auto px-6 py-4 md:py-6">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 
@@ -404,9 +430,9 @@
 
             formatCards.forEach(card => {
                 const titleText = card.querySelector('h3').textContent.toLowerCase();
-                const descText = card.querySelector('p').textContent.toLowerCase();
+                const descText = card.querySelector('p')?.textContent.toLowerCase() || '';
                 
-                if (titleText.includes(query) || descText.includes(query)) {
+                if (titleText.includes(query) || (descText && descText.includes(query))) {
                     card.classList.remove('hidden');
                     card.classList.add('flex');
                     matches++;
