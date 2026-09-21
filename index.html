@@ -506,5 +506,412 @@
             lastScroll = currentScroll;
         });
     </script>
+    <script>
+(function() {
+  if (window.__kanooz_assistant_initialized__) return;
+  window.__kanooz_assistant_initialized__ = true;
+
+  var KANOOZ_LOGO = "https://lh3.googleusercontent.com/d/1oQr4RoR9ON5vK6U_oIN2hW0HdnpEloO8";
+  var API_ENDPOINT = "https://ais-dev-3qyom2to6vi7ylsnna5bbr-307467376745.europe-west3.run.app/api/chat";
+  var STORAGE_KEY = "kanooz_assistant_history_v1";
+
+  // Inject CSS styles
+  var style = document.createElement("style");
+  style.textContent = `
+    #kanooz-assistant-container {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 999999;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    }
+    .kanooz-window {
+      position: absolute;
+      bottom: 66px;
+      right: 0;
+      width: 335px;
+      max-width: calc(100vw - 28px);
+      height: 450px;
+      max-height: calc(100vh - 90px);
+      background: rgba(255, 255, 255, 0.84) !important;
+      backdrop-filter: blur(20px) saturate(180%) !important;
+      -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+      box-shadow: 0 20px 45px -10px rgba(42, 52, 120, 0.32), 0 0 0 1px rgba(255, 255, 255, 0.8) inset, 0 0 0 1px rgba(42, 52, 120, 0.12);
+      border-radius: 20px;
+      overflow: hidden;
+      display: none;
+      flex-direction: column;
+      transform-origin: bottom right;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .kanooz-window.active {
+      display: flex !important;
+    }
+    .kanooz-header {
+      background: linear-gradient(135deg, rgba(28, 36, 92, 0.95), rgba(42, 52, 120, 0.9));
+      color: white;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      shrink: 0;
+    }
+    .kanooz-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 12px;
+      background: rgba(248, 250, 252, 0.6);
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .kanooz-bubble-bot {
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(8px);
+      border: 1px solid rgba(226, 232, 240, 0.9);
+      border-radius: 14px 14px 14px 3px;
+      padding: 10px 12px;
+      font-size: 11px;
+      line-height: 1.5;
+      color: #1e293b;
+      box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+      max-width: 90%;
+    }
+    .kanooz-bubble-bot a {
+      color: #2A3478;
+      font-weight: 700;
+      text-decoration: underline;
+    }
+    .kanooz-bubble-user {
+      background: #2A3478;
+      color: white;
+      border-radius: 14px 14px 3px 14px;
+      padding: 10px 12px;
+      font-size: 11px;
+      line-height: 1.5;
+      align-self: flex-end;
+      max-width: 85%;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.08);
+    }
+    .kanooz-chips {
+      background: rgba(255, 255, 255, 0.75);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(226, 232, 240, 0.8);
+      padding: 6px 10px;
+      display: flex;
+      gap: 5px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+    .kanooz-chip-btn {
+      background: rgba(255, 255, 255, 0.9);
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      padding: 3px 8px;
+      font-size: 10px;
+      font-weight: 600;
+      color: #334155;
+      cursor: pointer;
+    }
+    .kanooz-chip-btn:hover {
+      background: #eef2ff;
+      color: #2A3478;
+    }
+    .kanooz-input-bar {
+      padding: 8px 10px;
+      background: rgba(255, 255, 255, 0.85);
+      backdrop-filter: blur(10px);
+      border-top: 1px solid rgba(226, 232, 240, 0.8);
+      display: flex;
+      gap: 6px;
+    }
+    .kanooz-input {
+      flex: 1;
+      border: 1px solid #cbd5e1;
+      border-radius: 8px;
+      padding: 6px 10px;
+      font-size: 11px;
+      outline: none;
+      background: rgba(255, 255, 255, 0.95);
+    }
+    .kanooz-send-btn {
+      background: #2A3478;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0 12px;
+      font-size: 11px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    .kanooz-launcher-btn {
+      width: 52px;
+      height: 52px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.95);
+      border: 1px solid rgba(203, 213, 225, 0.9);
+      box-shadow: 0 10px 25px -5px rgba(42, 52, 120, 0.25);
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      transition: transform 0.2s;
+    }
+    .kanooz-launcher-btn:hover {
+      transform: scale(1.05);
+    }
+    .kanooz-badge {
+      position: absolute;
+      top: -3px;
+      right: -3px;
+      width: 14px;
+      height: 14px;
+      background: #C44128;
+      color: white;
+      border: 2px solid white;
+      border-radius: 50%;
+      font-size: 8px;
+      font-weight: bold;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  `;
+  document.head.appendChild(style);
+
+  // Knowledge fallback engine
+  function getFallback(query) {
+    var q = query.toLowerCase();
+    if (q.includes("about") || q.includes("company") || q.includes("service") || q.includes("kanooz.com") || q.includes("who is") || q.includes("specializ")) {
+      return "<strong>About Kanooz:</strong><br>Kanooz is a premier industrial services provider specializing in <strong>Mechanical Maintenance, Chemical Cleaning, Catalyst Replacement, and Tank Maintenance</strong>.<br><br>With decades of experience, we have successfully executed several shutdowns, turnarounds, and maintenance projects for leading refineries, petrochemical, mining plants, and industrial facilities.<br><br>For more details visit: <a href='https://kanooz.com/' target='_blank'>kanooz.com</a>";
+    }
+    if (q.includes("dept") || q.includes("invoice")) {
+      return "<strong>Department Updates & Invoicing:</strong><br>Submit updates and track invoices at: <a href='https://kanoozcp.github.io/departmentupdate/' target='_blank'>Department Updates Portal</a>";
+    }
+    if (q.includes("dashboard")) {
+      return "<strong>Executive Dashboard:</strong><br>View manpower, equipment, and project dashboards at: <a href='https://kanoozcp.github.io/dashboard/' target='_blank'>Central Planning Dashboard</a>";
+    }
+    if (q.includes("format") || q.includes("form") || q.includes("std")) {
+      return "<strong>Standard Formats & Forms:</strong><br>Download operational templates at: <a href='https://kanoozcp.github.io/stdformat/' target='_blank'>Standard Formats Library</a>";
+    }
+    if (q.includes("safety") || q.includes("observation")) {
+      return "<strong>Safety Observations:</strong><br>Report unsafe conditions or near misses at: <a href='https://kanoozcp.github.io/safety/' target='_blank'>Safety Observation Portal</a>";
+    }
+    return "<strong>Kanooz Assistant:</strong><br>• <a href='https://kanooz.com/' target='_blank'>kanooz.com</a><br>• <a href='https://kanoozcp.github.io/dashboard/' target='_blank'>Executive Dashboard</a><br>• <a href='https://kanoozcp.github.io/departmentupdate/' target='_blank'>Department Updates</a><br>• <a href='https://kanoozcp.github.io/stdformat/' target='_blank'>Standard Formats</a><br>• <a href='https://kanoozcp.github.io/safety/' target='_blank'>Safety Reporting</a>";
+  }
+
+  function formatText(t) {
+    return t
+      .replace(/^### (.*$)/gim, '<strong style="display:block;color:#2A3478;font-size:12px;margin-bottom:4px;">$1</strong>')
+      .replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>')
+      .replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" rel="noopener noreferrer">$1</a>')
+      .replace(/\n/g, '<br>');
+  }
+
+  // Storage helpers
+  function loadHistory() {
+    try {
+      var saved = localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        var parsed = JSON.parse(saved);
+        if (Array.isArray(parsed)) return parsed;
+      }
+    } catch(e) {}
+    return [];
+  }
+
+  function saveHistory(history) {
+    try {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(history));
+    } catch(e) {}
+  }
+
+  var chatHistory = loadHistory();
+
+  var root = document.createElement("div");
+  root.id = "kanooz-assistant-container";
+  root.innerHTML = `
+    <div id="kanooz-win" class="kanooz-window">
+      <div class="kanooz-header">
+        <div style="display:flex;align-items:center;gap:8px;">
+          <img src="${KANOOZ_LOGO}" style="width:24px;height:24px;object-fit:contain;background:white;border-radius:6px;padding:2px;" />
+          <div>
+            <div style="font-size:12px;font-weight:bold;">Kanooz Assistant</div>
+            <div style="font-size:9px;opacity:0.8;">Active • Persistent Memory</div>
+          </div>
+        </div>
+        <div style="display:flex;gap:3px;align-items:center;">
+          <button id="kanooz-clr-btn" title="Clear memory" style="background:none;border:none;color:white;font-size:12px;cursor:pointer;padding:2px 5px;opacity:0.8;">🗑️</button>
+          <button id="kanooz-min-btn" title="Minimize" style="background:none;border:none;color:white;font-size:14px;cursor:pointer;padding:2px 6px;">−</button>
+          <button id="kanooz-close-btn" title="Close" style="background:none;border:none;color:white;font-size:14px;cursor:pointer;padding:2px 6px;">✕</button>
+        </div>
+      </div>
+      <div id="kanooz-msgs" class="kanooz-messages"></div>
+      <div class="kanooz-chips">
+        <button class="kanooz-chip-btn" data-q="About Kanooz">About Kanooz</button>
+        <button class="kanooz-chip-btn" data-q="Department updates">Department Updates</button>
+        <button class="kanooz-chip-btn" data-q="Executive Dashboard">Dashboard</button>
+        <button class="kanooz-chip-btn" data-q="Standard Formats">Standard Formats</button>
+        <button class="kanooz-chip-btn" data-q="Report safety observation">Safety</button>
+      </div>
+      <div class="kanooz-input-bar">
+        <input id="kanooz-inp" class="kanooz-input" placeholder="Ask Kanooz Assistant..." />
+        <button id="kanooz-snd" class="kanooz-send-btn">Ask</button>
+      </div>
+    </div>
+
+    <button id="kanooz-btn" class="kanooz-launcher-btn" title="Kanooz Assistant">
+      <span id="kanooz-badge" class="kanooz-badge">1</span>
+      <img id="kanooz-open-img" src="${KANOOZ_LOGO}" style="width:34px;height:34px;object-fit:contain;" />
+      <span id="kanooz-close-icon" style="display:none;font-size:20px;color:#2A3478;font-weight:bold;">✕</span>
+    </button>
+  `;
+  document.body.appendChild(root);
+
+  var win = document.getElementById("kanooz-win");
+  var btn = document.getElementById("kanooz-btn");
+  var openImg = document.getElementById("kanooz-open-img");
+  var closeIcon = document.getElementById("kanooz-close-icon");
+  var badge = document.getElementById("kanooz-badge");
+  var inp = document.getElementById("kanooz-inp");
+  var snd = document.getElementById("kanooz-snd");
+  var msgs = document.getElementById("kanooz-msgs");
+  var minBtn = document.getElementById("kanooz-min-btn");
+  var closeBtn = document.getElementById("kanooz-close-btn");
+  var clrBtn = document.getElementById("kanooz-clr-btn");
+  var isOpen = false;
+
+  function renderWelcome() {
+    msgs.innerHTML = `
+      <div style="display:flex;gap:6px;align-items:flex-start;">
+        <img src="${KANOOZ_LOGO}" style="width:20px;height:20px;object-fit:contain;background:white;border-radius:4px;padding:1px;border:1px solid #cbd5e1;" />
+        <div class="kanooz-bubble-bot">
+          <strong>Welcome to Kanooz Assistant</strong><br>
+          Ask any question about Kanooz services, live dashboard, department updates, standard forms, or safety.
+        </div>
+      </div>
+    `;
+  }
+
+  function renderHistory() {
+    if (!chatHistory || chatHistory.length === 0) {
+      renderWelcome();
+      return;
+    }
+    msgs.innerHTML = "";
+    chatHistory.forEach(function(m) {
+      if (m.role === "user") {
+        var userDiv = document.createElement("div");
+        userDiv.className = "kanooz-bubble-user";
+        userDiv.textContent = m.content;
+        msgs.appendChild(userDiv);
+      } else {
+        var botDiv = document.createElement("div");
+        botDiv.style.display = "flex";
+        botDiv.style.gap = "6px";
+        botDiv.style.alignItems = "flex-start";
+        botDiv.innerHTML = `
+          <img src="${KANOOZ_LOGO}" style="width:20px;height:20px;object-fit:contain;background:white;border-radius:4px;padding:1px;border:1px solid #cbd5e1;" />
+          <div class="kanooz-bubble-bot">${formatText(m.content)}</div>
+        `;
+        msgs.appendChild(botDiv);
+      }
+    });
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  renderHistory();
+
+  function toggle(show) {
+    isOpen = typeof show === "boolean" ? show : !isOpen;
+    if (isOpen) {
+      win.classList.add("active");
+      openImg.style.display = "none";
+      closeIcon.style.display = "block";
+      if (badge) badge.style.display = "none";
+      setTimeout(function() { inp.focus(); msgs.scrollTop = msgs.scrollHeight; }, 100);
+    } else {
+      win.classList.remove("active");
+      openImg.style.display = "block";
+      closeIcon.style.display = "none";
+    }
+  }
+
+  btn.addEventListener("click", function(e) { e.stopPropagation(); toggle(); });
+  minBtn.addEventListener("click", function(e) { e.stopPropagation(); toggle(false); });
+  closeBtn.addEventListener("click", function(e) { e.stopPropagation(); toggle(false); });
+
+  clrBtn.addEventListener("click", function(e) {
+    e.stopPropagation();
+    chatHistory = [];
+    try { localStorage.removeItem(STORAGE_KEY); } catch(err) {}
+    renderWelcome();
+  });
+
+  document.addEventListener("click", function(e) {
+    if (isOpen && !root.contains(e.target)) toggle(false);
+  });
+
+  async function send(query) {
+    var txt = query || inp.value.trim();
+    if (!txt) return;
+    inp.value = "";
+
+    var userDiv = document.createElement("div");
+    userDiv.className = "kanooz-bubble-user";
+    userDiv.textContent = txt;
+    msgs.appendChild(userDiv);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    chatHistory.push({ role: "user", content: txt });
+    saveHistory(chatHistory);
+
+    var botWrapper = document.createElement("div");
+    botWrapper.style.display = "flex";
+    botWrapper.style.gap = "6px";
+    botWrapper.style.alignItems = "flex-start";
+    botWrapper.innerHTML = `
+      <img src="${KANOOZ_LOGO}" style="width:20px;height:20px;object-fit:contain;background:white;border-radius:4px;padding:1px;border:1px solid #cbd5e1;" />
+      <div class="kanooz-bubble-bot">Analyzing...</div>
+    `;
+    msgs.appendChild(botWrapper);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    var answer = "";
+    try {
+      var res = await fetch(API_ENDPOINT, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: txt, history: chatHistory.slice(-4) })
+      });
+      if (res.ok) {
+        var data = await res.json();
+        answer = data.reply || getFallback(txt);
+      } else {
+        answer = getFallback(txt);
+      }
+    } catch(err) {
+      answer = getFallback(txt);
+    }
+
+    botWrapper.querySelector(".kanooz-bubble-bot").innerHTML = formatText(answer);
+    msgs.scrollTop = msgs.scrollHeight;
+
+    chatHistory.push({ role: "assistant", content: answer });
+    saveHistory(chatHistory);
+  }
+
+  snd.addEventListener("click", function() { send(); });
+  inp.addEventListener("keydown", function(e) { if (e.key === "Enter") send(); });
+
+  root.querySelectorAll(".kanooz-chip-btn").forEach(function(chip) {
+    chip.addEventListener("click", function() {
+      send(chip.getAttribute("data-q"));
+    });
+  });
+})();
+</script>
 </body>
 </html>
