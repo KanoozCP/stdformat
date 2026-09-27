@@ -8,46 +8,44 @@
     <!-- Modern Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&family=Poppins:wght@600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <!-- Lucide Icons -->
     <script src="https://unpkg.com/lucide@latest"></script>
     
-    <!-- Tailwind CSS 4 -->
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
-
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        kanooz: {
+                            navy: '#2A3478',
+                            dark: '#1c245c',
+                            orange: '#C44128'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    
     <style>
         :root {
             --kcp-navy: #2A3478;
-            --kcp-indigo: #2A3478;
-            --kcp-blue: #2A3478;
-            --kcp-terracotta: #C44128;
-            --kcp-gradient: linear-gradient(135deg, #2A3478 0%, #1c245c 45%, #C44128 100%);
+            --kcp-dark: #1c245c;
+            --kcp-orange: #C44128;
         }
-
         body {
             font-family: 'Plus Jakarta Sans', 'Inter', sans-serif;
             background-color: #f8fafc;
             color: #0f172a;
             min-height: 100vh;
         }
-
-        h1, h2, h3, h4 {
-            font-family: 'Plus Jakarta Sans', 'Poppins', sans-serif;
-        }
-
-        @keyframes kcpGrad {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        .animate-kcp-gradient {
-            background: var(--kcp-gradient);
-            background-size: 200% 200%;
-            animation: kcpGrad 6s ease infinite;
-        }
-
         .glass-header {
             position: sticky;
             top: 0;
@@ -58,324 +56,430 @@
             transition: transform 0.3s ease;
             box-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
-
-        .header-hidden {
-            transform: translateY(-100%);
+        @keyframes kcpGrad {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
-
-        .format-card {
-            background: rgba(255, 255, 255, 0.4);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(241, 245, 249, 0.8);
-            border-radius: 1rem;
-            padding: 0.625rem 1rem;
-            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            min-height: 0;
+        .animate-kcp-gradient {
+            background: linear-gradient(135deg, #2A3478 0%, #1c245c 45%, #C44128 100%);
+            background-size: 200% 200%;
+            animation: kcpGrad 6s ease infinite;
         }
-
-        .format-card:hover {
-            transform: translateY(-6px);
-            box-shadow: 0 25px 30px -10px rgba(42, 52, 120, 0.12);
-            background: rgba(255, 255, 255, 0.65);
-            border-color: rgba(42, 52, 120, 0.25);
-        }
-
-        .icon-box {
-            width: 2.5rem;
-            height: 2.5rem;
-            border-radius: 0.75rem;
+        .category-title {
             display: flex;
             align-items: center;
-            justify-content: center;
-            box-shadow: inset 0 1px 1px rgba(255,255,255,0.8);
+            gap: 0.75rem;
+            font-size: 1rem;
+            font-weight: 700;
+            color: #1e293b;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 0.025em;
+            opacity: 0.8;
         }
-
-        @keyframes spinner {
-            to { transform: rotate(360deg); }
+        .category-title::after {
+            content: "";
+            height: 1px;
+            flex-grow: 1;
+            background: #e2e8f0;
         }
-        .spinner {
-            width: 1.125rem;
-            height: 1.125rem;
-            border: 2px solid rgba(42, 52, 120, 0.1);
-            border-top-color: #2A3478;
-            border-radius: 50%;
-            animation: spinner 0.6s linear infinite;
+        .format-row {
+            background: rgba(255, 255, 255, 0.5);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(42, 52, 120, 0.1);
+            border-radius: 1rem;
+            transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .format-row:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 24px -6px rgba(42, 52, 120, 0.08);
+            border-color: rgba(42, 52, 120, 0.3);
+            background: rgba(255, 255, 255, 0.9);
+        }
+        .btn-download {
+            background-color: #2A3478;
+            color: #ffffff;
+            transition: all 0.2s ease;
+        }
+        .btn-download:hover {
+            background-color: #1c245c;
+            box-shadow: 0 4px 12px rgba(42, 52, 120, 0.25);
+        }
+        .btn-download:active {
+            transform: scale(0.98);
         }
     </style>
 </head>
-<body>
+<body class="flex flex-col min-h-screen selection:bg-[#2A3478]/10 selection:text-[#2A3478]">
 
-    <!-- Background Elements -->
+    <!-- Background Watermark - Matches Home Page -->
     <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden opacity-[0.05] flex items-center justify-center">
         <img src="https://lh3.googleusercontent.com/d/1oQr4RoR9ON5vK6U_oIN2hW0HdnpEloO8" alt="Watermark" class="w-[600px] max-w-[80vw] select-none">
     </div>
 
-    <!-- Header -->
-    <header id="mainHeader" class="glass-header">
-        <div class="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between">
-            <a href="https://kanooz.com/" target="_blank" class="flex items-center gap-4 group shrink-0" title="Kanooz">
-                <img src="https://kanooz.com/wp-content/uploads/2026/05/KANOOZ-LOGO-2026-transparent-color-2048x331.avif" alt="Kanooz Logo" class="h-8 sm:h-9 md:h-11 w-auto max-w-[160px] sm:max-w-[210px] md:max-w-[260px] object-contain transition-transform group-hover:scale-105 drop-shadow-sm">
+    <!-- Header - Exact Match to Home Page & Header.tsx -->
+    <header class="glass-header">
+        <div class="max-w-7xl mx-auto px-6 h-20 md:h-24 flex items-center justify-between relative">
+            <a href="https://kanooz.com/" target="_blank" class="flex items-center gap-4 group shrink-0" rel="noreferrer" title="Kanooz">
+                <img 
+                    src="https://kanooz.com/wp-content/uploads/2026/05/KANOOZ-LOGO-2026-transparent-color-2048x331.avif" 
+                    alt="Kanooz Logo" 
+                    class="h-8 sm:h-9 md:h-11 w-auto max-w-[140px] sm:max-w-[210px] md:max-w-[260px] object-contain transition-transform group-hover:scale-105 drop-shadow-sm"
+                >
             </a>
 
-            <div class="absolute left-1/2 -translate-x-1/2">
+            <!-- Central Title Badge with Animated Gradient -->
+            <div class="absolute left-1/2 -translate-x-1/2 max-w-[50%] sm:max-w-none">
                 <div class="animate-kcp-gradient p-[1px] rounded-2xl shadow-xl">
-                    <div class="bg-white/10 backdrop-blur-xl px-4 md:px-10 py-3 rounded-[15px] border border-white/20 text-center">
-                        <h1 class="text-white font-extrabold text-sm md:text-xl tracking-tight uppercase whitespace-nowrap">
+                    <div class="bg-white/10 backdrop-blur-xl px-3 sm:px-6 md:px-10 py-1.5 sm:py-2 md:py-3 rounded-[15px] border border-white/20 text-center">
+                        <h1 class="text-white font-extrabold text-xs sm:text-base md:text-xl tracking-tight uppercase whitespace-nowrap truncate sm:overflow-visible">
                             Central Planning Portal
                         </h1>
                     </div>
                 </div>
             </div>
 
-            <!-- Standalone back button indicator -->
-            <div>
-                <a href="https://kanoozcp.github.io/" class="inline-flex items-center gap-1.5 px-3 py-1.5 md:px-4 md:py-2 border border-slate-200 bg-white hover:bg-slate-50 text-slate-700 hover:text-[#2A3478] transition-all rounded-xl text-xs md:text-sm font-bold shadow-sm">
-                    <i data-lucide="home" style="width:16px;height:16px"></i>
-                    <span>Back to Portal</span>
+            <!-- Back to Portal Button -->
+            <div class="flex items-center gap-3">
+                <a href="https://kanoozcp.github.io/" class="flex items-center gap-1.5 px-3 py-1.5 sm:px-4 sm:py-2 bg-white/60 hover:bg-white border border-slate-200 rounded-xl text-slate-600 hover:text-[#2A3478] font-bold text-xs sm:text-sm transition-all shadow-sm hover:shadow-md shrink-0">
+                    <i data-lucide="home" class="w-4 h-4"></i>
+                    <span class="hidden sm:inline">Back to </span><span>Portal</span>
                 </a>
             </div>
         </div>
     </header>
 
-    <!-- Main Content -->
-    <main class="max-w-7xl mx-auto px-6 py-8 md:py-12 relative z-10">
+    <!-- Main Content Container - Matches Home Page Grid Width -->
+    <main class="max-w-7xl mx-auto px-6 py-8 md:py-12 relative z-10 w-full flex-1">
         
-        <!-- Welcome Section -->
-        <section class="mb-12 animate-fade-in text-left flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <!-- Welcome Hero Section - Matches Home Page Visual Hierarchy -->
+        <section class="mb-10 flex flex-col md:flex-row md:items-center justify-between gap-8">
             <div>
+                <div class="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-[#2A3478]/10 border border-[#2A3478]/20 mb-3">
+                    <i data-lucide="download" class="w-3.5 h-3.5 text-[#2A3478]"></i>
+                    <span class="text-[10px] font-bold text-[#2A3478] uppercase tracking-wider">Official Templates & Forms</span>
+                </div>
                 <h2 class="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-2">
                     Standard <span style="color: #C44128;">Formats</span>
                 </h2>
-                <p class="text-slate-500 text-base max-w-lg leading-snug font-medium">
-                    Download templates for MP Request, EQ Request & Others.
+                <p class="text-slate-500 text-base max-w-xl leading-snug font-medium">
+                    Verified standard format templates for Manpower, Equipment & Operations.
                 </p>
-            </div>
-
-            <!-- Search Bar Inner Right on Larger Screens, Full Width on Mobile -->
-            <div class="relative w-full md:max-w-md shrink-0">
-                <div class="absolute inset-y-0 left-0 pl-4 flex items-center pointer-events-none">
-                    <i data-lucide="search" class="h-4 w-4 text-slate-400"></i>
-                </div>
-                <input type="text" id="searchInput" placeholder="Search templates (e.g., manpower, equipment, expense)..." class="block w-full pl-11 pr-10 py-3 bg-white border border-slate-200 rounded-2xl text-slate-900 text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2A3478]/15 focus:border-[#2A3478] transition-all shadow-sm">
-                <button id="clearSearch" class="hidden absolute inset-y-0 right-0 pr-4 flex items-center hover:text-slate-600 text-slate-400 transition-colors">
-                    <i data-lucide="x" class="h-4 w-4"></i>
-                </button>
             </div>
         </section>
 
-        <!-- Empty state element (Hidden by Default) -->
-        <div id="emptyState" class="hidden flex-col items-center justify-center py-16 text-center bg-white/40 backdrop-blur-xl border border-slate-200 rounded-[2rem] p-8 animate-fade-in mb-8">
+        <!-- Filter and Search Bar -->
+        <div class="bg-white/40 backdrop-blur-xl border border-slate-200/80 rounded-2xl p-4 sm:p-5 mb-8 shadow-sm flex flex-col md:flex-row items-stretch md:items-center justify-between gap-4">
+            
+            <!-- Category Pills -->
+            <div class="flex items-center gap-1.5 overflow-x-auto pb-1 md:pb-0" id="filterBar">
+                <span class="text-xs font-bold text-slate-400 mr-1 flex items-center gap-1 shrink-0 uppercase tracking-wider text-[10px]">
+                    <i data-lucide="filter" class="w-3.5 h-3.5"></i> Category:
+                </span>
+                <button data-cat="all" class="cat-pill active px-3.5 py-1.5 rounded-xl text-xs font-bold bg-[#2A3478] text-white shadow-sm shadow-[#2A3478]/25 scale-[1.02] transition-all whitespace-nowrap cursor-pointer">All</button>
+                <button data-cat="Operations" class="cat-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/80 hover:bg-white text-slate-600 hover:text-[#2A3478] border border-slate-200/80 transition-all whitespace-nowrap cursor-pointer">Operations</button>
+                <button data-cat="Finance" class="cat-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/80 hover:bg-white text-slate-600 hover:text-[#2A3478] border border-slate-200/80 transition-all whitespace-nowrap cursor-pointer">Finance</button>
+                <button data-cat="HR & Admin" class="cat-pill px-3.5 py-1.5 rounded-xl text-xs font-bold bg-white/80 hover:bg-white text-slate-600 hover:text-[#2A3478] border border-slate-200/80 transition-all whitespace-nowrap cursor-pointer">HR & Admin</button>
+            </div>
+            
+            <!-- Search Box -->
+            <div class="relative w-full md:w-80 shrink-0">
+                <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none">
+                    <i data-lucide="search" class="w-4 h-4 text-slate-400"></i>
+                </div>
+                <input 
+                    type="text" 
+                    id="searchInput"
+                    placeholder="Search formats or keywords..." 
+                    class="block w-full pl-10 pr-9 py-2 bg-white/90 border border-slate-200 rounded-xl text-slate-900 text-xs sm:text-sm placeholder-slate-400 focus:outline-none focus:ring-2 focus:ring-[#2A3478]/15 focus:border-[#2A3478] transition-all shadow-sm"
+                >
+                <button 
+                    id="clearSearch"
+                    style="display: none;"
+                    aria-label="Clear search"
+                    class="absolute inset-y-0 right-0 pr-3 flex items-center hover:text-slate-600 text-slate-400 transition-colors"
+                >
+                    <i data-lucide="x" class="w-4 h-4"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div id="emptyState" style="display: none;" class="flex-col items-center justify-center py-16 text-center bg-white/50 backdrop-blur-xl border border-slate-200/80 rounded-2xl p-8 shadow-sm">
             <div class="w-12 h-12 bg-slate-100 text-slate-400 rounded-2xl flex items-center justify-center mb-3">
                 <i data-lucide="alert-circle" class="w-6 h-6"></i>
             </div>
-            <h4 class="font-bold text-slate-900 text-base">No templates found</h4>
-            <p class="text-xs text-slate-500 mt-1">We couldn't find any templates matching your search criteria.</p>
+            <h4 class="font-bold text-slate-900 text-base">No matching templates found</h4>
+            <p class="text-xs text-slate-500 mt-1 max-w-md">Try searching for other keywords like manpower, equipment, expense, or leave.</p>
+            <button id="resetFiltersBtn" class="mt-4 px-4 py-2 bg-[#2A3478] text-white text-xs font-bold rounded-xl hover:bg-[#1c245c] transition-colors">
+                Reset Filters
+            </button>
         </div>
 
-        <!-- List Layout (Each in Line) -->
-        <div id="cardsContainer" class="flex flex-col gap-4">
-            
-            <!-- Format: Manpower Request -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
-                <!-- Left side -->
-                <div class="flex items-center gap-3 flex-1">
-                    <div class="icon-box shrink-0" style="background-color: rgba(42, 52, 120, 0.08); color: #2A3478;">
-                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
+        <!-- Line Items List -->
+        <div id="formatsList" class="flex flex-col gap-3">
+
+            <!-- Manpower Request -->
+            <div class="format-row group p-4 sm:px-6 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4" data-title="Manpower Request" data-category="Operations" data-desc="Submit overall manpower mobilization requests, trade counts, and crew allocations for site projects.">
+                <div class="flex items-start sm:items-center gap-4 flex-1 min-w-0">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border bg-blue-50 text-[#2A3478] border-blue-100 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <i data-lucide="users" class="w-5 h-5"></i>
                     </div>
-                    <div style="text-align:left">
-                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
-                            Manpower Request
-                        </h3>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
+                                Manpower Request
+                            </h3>
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-bold text-[10px] uppercase tracking-wide border bg-blue-50 text-blue-700 border-blue-200">
+                                <i data-lucide="file-text" class="w-3 h-3 text-blue-600"></i> DOCX
+                            </span>
+                            <span class="hidden md:inline-block text-[11px] font-semibold text-slate-400 bg-slate-100/80 px-2 py-0.5 rounded-md border border-slate-200/60">
+                                Operations
+                            </span>
+                            <div class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-100">
+                                <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-wider">All Access</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium line-clamp-2 sm:line-clamp-1 leading-relaxed">
+                            Submit overall manpower mobilization requests, trade counts, and crew allocations for site projects.
+                        </p>
                     </div>
                 </div>
-                
-                <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
-                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQDVHBwaZbhjS4TU_rlTtkIcAYRxUsO05EAlhIp-iRMsrkI?e=PCJxXy" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
-                        <span>PDF Format</span>
-                    </a>
-                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQBGdLYzlJ79Qp1i9gWl6aAQAWRCgDTdEjJ83DjZiNhVnb4?e=ecRTh1" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
-                        <span>Soft Copy</span>
+                <div class="shrink-0 w-full sm:w-auto">
+                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQBGdLYzlJ79Qp1i9gWl6aAQAWRCgDTdEjJ83DjZiNhVnb4?e=ecRTh1" target="_blank" rel="noopener noreferrer" class="btn-download inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-sm">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Download</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Format: Local Hire Manpower Request -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
-                <!-- Left side -->
-                <div class="flex items-center gap-3 flex-1">
-                    <div class="icon-box shrink-0" style="background-color: rgba(42, 52, 120, 0.08); color: #2A3478;">
-                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
+            <!-- Local Hire Manpower Request -->
+            <div class="format-row group p-4 sm:px-6 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4" data-title="Local Hire Manpower Request" data-category="Operations" data-desc="Request local-hire personnel, specialized craft labor, and short-term regional workforce deployment.">
+                <div class="flex items-start sm:items-center gap-4 flex-1 min-w-0">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border bg-indigo-50 text-[#2A3478] border-indigo-100 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <i data-lucide="user-check" class="w-5 h-5"></i>
                     </div>
-                    <div style="text-align:left">
-                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
-                            Local Hire Manpower Request
-                        </h3>
-                    </div>
-                </div>
-                
-                <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
-                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQC7E0HgLsfCTo5RoGVT3RRjAfR49wqtR_y7sD5t0vOVwjA?e=xISZW8" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
-                        <span>PDF Format</span>
-                    </a>
-                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQC8y4yJbkMIT7c7cS18p3RXASXQeS2yruKbUA7GCCtypio?e=lzLfTF" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
-                        <span>Soft Copy</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Format: Equipment Request -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
-                <!-- Left side -->
-                <div class="flex items-center gap-3 flex-1">
-                    <div class="icon-box shrink-0" style="background-color: rgba(42, 52, 120, 0.08); color: #2A3478;">
-                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
-                    </div>
-                    <div style="text-align:left">
-                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
-                            Equipment Request
-                        </h3>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
+                                Local Hire Manpower Request
+                            </h3>
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-bold text-[10px] uppercase tracking-wide border bg-blue-50 text-blue-700 border-blue-200">
+                                <i data-lucide="file-text" class="w-3 h-3 text-blue-600"></i> DOCX
+                            </span>
+                            <span class="hidden md:inline-block text-[11px] font-semibold text-slate-400 bg-slate-100/80 px-2 py-0.5 rounded-md border border-slate-200/60">
+                                Operations
+                            </span>
+                            <div class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-100">
+                                <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-wider">All Access</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium line-clamp-2 sm:line-clamp-1 leading-relaxed">
+                            Request local-hire personnel, specialized craft labor, and short-term regional workforce deployment.
+                        </p>
                     </div>
                 </div>
-                
-                <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
-                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQBrvY84TDBmR62d_j9SFBCzAXDejqBOi87JAfXOpFZrf1A?e=nSa9lk" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
-                        <span>PDF Format</span>
-                    </a>
-                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQDubiuHghUlTaST3dD64yFgAci_HzYQIU0xiqozYmg-qco?e=7ZrW8p" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
-                        <span>Soft Copy</span>
+                <div class="shrink-0 w-full sm:w-auto">
+                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQC8y4yJbkMIT7c7cS18p3RXASXQeS2yruKbUA7GCCtypio?e=lzLfTF" target="_blank" rel="noopener noreferrer" class="btn-download inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-sm">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Download</span>
                     </a>
                 </div>
             </div>
 
-            <!-- Format: Expense Report -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
-                <!-- Left side -->
-                <div class="flex items-center gap-3 flex-1">
-                    <div class="icon-box shrink-0" style="background-color: rgba(42, 52, 120, 0.08); color: #2A3478;">
-                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
+            <!-- Equipment Request -->
+            <div class="format-row group p-4 sm:px-6 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4" data-title="Equipment Request" data-category="Operations" data-desc="Requisition specialized machinery, heavy equipment, specialized tooling, and fleet vehicles.">
+                <div class="flex items-start sm:items-center gap-4 flex-1 min-w-0">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border bg-amber-50 text-amber-600 border-amber-100 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <i data-lucide="truck" class="w-5 h-5"></i>
                     </div>
-                    <div style="text-align:left">
-                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
-                            Expense Report
-                        </h3>
-                    </div>
-                </div>
-                
-                <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
-                    <a href="https://kanooz365-my.sharepoint.com/:b:/g/personal/naved_kanooz_com/IQAlYhlc9JtHS5aIefKilN3oAfUt6updHewtM4z6frITky4?e=EkVJhJ" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
-                        <span>PDF Format</span>
-                    </a>
-                    <a href="https://kanooz365-my.sharepoint.com/:x:/g/personal/naved_kanooz_com/IQA-4U373ilvQ6U31fdsftsGAU3JqWZ_fVlZdGWWqoyCIgs?e=gHNbbM" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
-                        <span>Soft Copy</span>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Format: Leave Application -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
-                <!-- Left side -->
-                <div class="flex items-center gap-3 flex-1">
-                    <div class="icon-box shrink-0" style="background-color: rgba(42, 52, 120, 0.08); color: #2A3478;">
-                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
-                    </div>
-                    <div style="text-align:left">
-                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
-                            Leave Application
-                        </h3>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
+                                Equipment Request
+                            </h3>
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-bold text-[10px] uppercase tracking-wide border bg-blue-50 text-blue-700 border-blue-200">
+                                <i data-lucide="file-text" class="w-3 h-3 text-blue-600"></i> DOCX
+                            </span>
+                            <span class="hidden md:inline-block text-[11px] font-semibold text-slate-400 bg-slate-100/80 px-2 py-0.5 rounded-md border border-slate-200/60">
+                                Operations
+                            </span>
+                            <div class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-100">
+                                <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-wider">All Access</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium line-clamp-2 sm:line-clamp-1 leading-relaxed">
+                            Requisition specialized machinery, heavy equipment, specialized tooling, and fleet vehicles.
+                        </p>
                     </div>
                 </div>
-                
-                <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
-                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
-                        <span>PDF Format</span>
-                    </a>
-                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQD3DEeaLhFzR5Bl6u0KRZE3ASgd48YwaJSoUQ1WkMVIetk?e=ePoEh8" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
-                        <span>Soft Copy</span>
-                    </a>
-                </div>
-            </div>
-            
-<!-- Format: IT Clearance Checklist -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
-                <!-- Left side -->
-                <div class="flex items-center gap-3 flex-1">
-                    <div class="icon-box shrink-0" style="background-color: rgba(42, 52, 120, 0.08); color: #2A3478;">
-                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
-                    </div>
-                    <div style="text-align:left">
-                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
-                            IT Clearance Checklist (Along with Leave Application)
-                        </h3>
-                    </div>
-                </div>
-                
-                <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
-                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
-                        <span>PDF Format</span>
-                    </a>
-                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQAjSuUNVGgjRbpTR7gpLh8xAZw_jUHF9syRg9QnKdy0_Ms?e=cekube" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
-                        <span>Soft Copy</span>
+                <div class="shrink-0 w-full sm:w-auto">
+                    <a href="https://kanooz365-my.sharepoint.com/:w:/g/personal/naved_kanooz_com/IQDubiuHghUlTaST3dD64yFgAci_HzYQIU0xiqozYmg-qco?e=7ZrW8p" target="_blank" rel="noopener noreferrer" class="btn-download inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-sm">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Download</span>
                     </a>
                 </div>
             </div>
 
-<!-- Format: Liability Clearance -->
-            <div class="format-card group flex flex-col md:flex-row md:items-center justify-between gap-3 md:gap-6 p-2.5 sm:px-4 sm:py-3" style="border-radius:1rem">
-                <!-- Left side -->
-                <div class="flex items-center gap-3 flex-1">
-                    <div class="icon-box shrink-0" style="background-color: rgba(42, 52, 120, 0.08); color: #2A3478;">
-                        <i data-lucide="file-text" style="width:20px;height:20px"></i>
+            <!-- Expense Report -->
+            <div class="format-row group p-4 sm:px-6 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4" data-title="Expense Report" data-category="Finance" data-desc="Submit operational expenses, out-of-pocket site purchases, and project bills for reimbursement.">
+                <div class="flex items-start sm:items-center gap-4 flex-1 min-w-0">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border bg-emerald-50 text-emerald-600 border-emerald-100 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <i data-lucide="receipt" class="w-5 h-5"></i>
                     </div>
-                    <div style="text-align:left">
-                        <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
-                            Liability Clearance (Along with Leave Application)
-                        </h3>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
+                                Expense Report
+                            </h3>
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-bold text-[10px] uppercase tracking-wide border bg-emerald-50 text-emerald-700 border-emerald-200">
+                                <i data-lucide="file-spreadsheet" class="w-3 h-3 text-emerald-600"></i> XLSX
+                            </span>
+                            <span class="hidden md:inline-block text-[11px] font-semibold text-slate-400 bg-slate-100/80 px-2 py-0.5 rounded-md border border-slate-200/60">
+                                Finance
+                            </span>
+                            <div class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-100">
+                                <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-wider">All Access</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium line-clamp-2 sm:line-clamp-1 leading-relaxed">
+                            Submit operational expenses, out-of-pocket site purchases, and project bills for reimbursement.
+                        </p>
                     </div>
                 </div>
-                
-                <!-- PDF & Soft Copy buttons side-by-side -->
-                <div class="grid grid-cols-2 md:flex items-center gap-2 shrink-0 w-full md:w-auto md:self-center">
-                    <a href="https://kanoozcp.github.io/error/" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-rose-50 text-rose-700 hover:bg-rose-100 rounded-xl font-bold text-xs text-center border border-rose-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-text" style="width:14px;height:14px" class="text-rose-500"></i>
-                        <span>PDF Format</span>
-                    </a>
-                    <a href="https://kanooz365-my.sharepoint.com/:x:/g/personal/naved_kanooz_com/IQCFKu3HcCQ2QoSVy2Ff0b0jAUgl71SYDKAXFfySdXFYkb4?e=quU87A" target="_blank" class="flex items-center justify-center gap-1.5 py-2 px-3.5 md:w-32 bg-emerald-50 text-emerald-700 hover:bg-emerald-100 rounded-xl font-bold text-xs text-center border border-emerald-100 transition-all shadow-sm active:scale-[0.98]">
-                        <i data-lucide="file-spreadsheet" style="width:14px;height:14px" class="text-emerald-500"></i>
-                        <span>Soft Copy</span>
+                <div class="shrink-0 w-full sm:w-auto">
+                    <a href="https://kanooz365-my.sharepoint.com/:x:/g/personal/naved_kanooz_com/IQA-4U373ilvQ6U31fdsftsGAU3JqWZ_fVlZdGWWqoyCIgs?e=gHNbbM" target="_blank" rel="noopener noreferrer" class="btn-download inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-sm">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Download</span>
                     </a>
                 </div>
             </div>
+
+            <!-- Folder Access (HR) -->
+            <div class="format-row group p-4 sm:px-6 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4" data-title="HR Forms" data-category="HR & Admin" data-desc="Central Planning shared folders, document archives, and standard formats.">
+                <div class="flex items-start sm:items-center gap-4 flex-1 min-w-0">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border bg-amber-50 text-amber-700 border-amber-100 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <i data-lucide="folder-open" class="w-5 h-5"></i>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
+                                HR Forms
+                            </h3>
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-bold text-[10px] uppercase tracking-wide border bg-amber-50 text-amber-700 border-amber-200">
+                                <i data-lucide="folder" class="w-3 h-3 text-amber-600"></i> FOLDER
+                            </span>
+                            <span class="hidden md:inline-block text-[11px] font-semibold text-slate-400 bg-slate-100/80 px-2 py-0.5 rounded-md border border-slate-200/60">
+                                HR & Admin
+                            </span>
+                            <div class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-100">
+                                <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-wider">All Access</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium line-clamp-2 sm:line-clamp-1 leading-relaxed">
+                            Central Planning shared folders, document archives, and standard formats.
+                        </p>
+                    </div>
+                </div>
+                <div class="shrink-0 w-full sm:w-auto">
+                    <a href="https://kanooz365-my.sharepoint.com/:f:/g/personal/naved_kanooz_com/IgAwRZJgRQ3GQ4wENXn7gDngAc02leDVHmckfLjEqRFnmz8?e=vfpi65" target="_blank" rel="noopener noreferrer" class="btn-download inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-sm">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Download</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Folder Access (Mechanical) -->
+            <div class="format-row group p-4 sm:px-6 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4" data-title="Mechanical Forms" data-category="Operations" data-desc="Central Planning shared folders, document archives, and standard formats.">
+                <div class="flex items-start sm:items-center gap-4 flex-1 min-w-0">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border bg-amber-50 text-amber-700 border-amber-100 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <i data-lucide="folder-open" class="w-5 h-5"></i>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
+                                Mechanical Forms
+                            </h3>
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-bold text-[10px] uppercase tracking-wide border bg-amber-50 text-amber-700 border-amber-200">
+                                <i data-lucide="folder" class="w-3 h-3 text-amber-600"></i> FOLDER
+                            </span>
+                            <span class="hidden md:inline-block text-[11px] font-semibold text-slate-400 bg-slate-100/80 px-2 py-0.5 rounded-md border border-slate-200/60">
+                                Operations
+                            </span>
+                            <div class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-100">
+                                <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-wider">All Access</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium line-clamp-2 sm:line-clamp-1 leading-relaxed">
+                            Central Planning shared folders, document archives, and standard formats.
+                        </p>
+                    </div>
+                </div>
+                <div class="shrink-0 w-full sm:w-auto">
+                    <a href="https://kanooz365-my.sharepoint.com/:f:/g/personal/naved_kanooz_com/IgC_R80ZU5BLQLswLEOC0eL1AWPHV65yig8f3M1eujmyZjM?e=9mXkSk" target="_blank" rel="noopener noreferrer" class="btn-download inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-sm">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Download</span>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Folder Access (Catalyst) -->
+            <div class="format-row group p-4 sm:px-6 sm:py-4 flex flex-col sm:flex-row sm:items-center justify-between gap-4" data-title="Folder Access" data-category="HR & Admin" data-desc="Central Planning shared folders, document archives, and standard formats.">
+                <div class="flex items-start sm:items-center gap-4 flex-1 min-w-0">
+                    <div class="w-12 h-12 rounded-xl flex items-center justify-center shrink-0 border bg-amber-50 text-amber-700 border-amber-100 shadow-sm group-hover:scale-105 transition-transform duration-300">
+                        <i data-lucide="folder-open" class="w-5 h-5"></i>
+                    </div>
+                    <div class="min-w-0 flex-1">
+                        <div class="flex flex-wrap items-center gap-2 mb-1">
+                            <h3 class="font-bold text-slate-900 text-sm sm:text-base leading-snug group-hover:text-[#2A3478] transition-colors">
+                                Catalyst Forms
+                            </h3>
+                            <span class="inline-flex items-center gap-1 px-2 py-0.5 rounded-md font-bold text-[10px] uppercase tracking-wide border bg-amber-50 text-amber-700 border-amber-200">
+                                <i data-lucide="folder" class="w-3 h-3 text-amber-600"></i> FOLDER
+                            </span>
+                            <span class="hidden md:inline-block text-[11px] font-semibold text-slate-400 bg-slate-100/80 px-2 py-0.5 rounded-md border border-slate-200/60">
+                                Operations
+                            </span>
+                            <div class="inline-flex items-center gap-1 px-1.5 py-0.5 rounded-md bg-emerald-50 border border-emerald-100">
+                                <span class="text-[9px] font-bold text-emerald-600 uppercase tracking-wider">All Access</span>
+                            </div>
+                        </div>
+                        <p class="text-slate-500 text-xs sm:text-sm font-medium line-clamp-2 sm:line-clamp-1 leading-relaxed">
+                            Central Planning shared folders, document archives, and standard formats.
+                        </p>
+                    </div>
+                </div>
+                <div class="shrink-0 w-full sm:w-auto">
+                    <a href="https://kanooz365-my.sharepoint.com/:f:/g/personal/naved_kanooz_com/IgB7qo9MIfSLSK5FryF_4kNbAejrdeLV22u3aiViP4NcD_w?e=pzGaFT" target="_blank" rel="noopener noreferrer" class="btn-download inline-flex items-center justify-center gap-2 w-full sm:w-auto px-6 py-2.5 rounded-xl font-bold text-xs sm:text-sm shadow-sm">
+                        <i data-lucide="download" class="w-4 h-4"></i>
+                        <span>Download</span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Support Info Banner -->
+        <div class="mt-12 p-4 sm:p-5 rounded-2xl bg-white/40 backdrop-blur-xl border border-slate-200/80 flex flex-col sm:flex-row items-center justify-between gap-3 text-center sm:text-left">
+            <div class="text-xs text-slate-600 flex items-center gap-2">
+                <i data-lucide="check-circle-2" class="w-4 h-4 text-emerald-600 shrink-0 hidden sm:block"></i>
+                <span>
+                    <strong class="text-slate-800">Need an unlisted format or special form?</strong> Contact Central Planning directly.
+                </span>
+            </div>
+            <a href="https://kanooz.com" target="_blank" rel="noopener noreferrer" class="text-xs font-bold text-[#2A3478] hover:text-[#C44128] transition-colors whitespace-nowrap">
+                Email &rarr;
+            </a>
         </div>
 
     </main>
 
-    <!-- Reduced Footer -->
-    <footer class="mt-8 border-t border-slate-200/60 bg-white/30 backdrop-blur-3xl relative z-10 w-full">
+    <!-- Footer - Exact Match to Footer.tsx & Home Page -->
+    <footer class="mt-auto border-t border-slate-200/60 bg-white/30 backdrop-blur-3xl relative z-10 w-full">
         <div class="max-w-7xl mx-auto px-6 py-4 md:py-6">
             <div class="flex flex-col md:flex-row items-center justify-between gap-4">
                 
-                <!-- Contact Icons Row -->
                 <div class="flex flex-wrap items-center justify-center md:justify-start gap-x-6 gap-y-3">
                     <div class="flex items-center gap-2 group cursor-default">
                         <i data-lucide="map-pin" class="w-3.5 h-3.5 text-slate-400"></i>
@@ -384,16 +488,15 @@
 
                     <a href="mailto:Info@kanooz.com" class="flex items-center gap-2 group">
                         <i data-lucide="mail" class="w-3.5 h-3.5" style="color: #C44128;"></i>
-                        <span class="text-slate-600 font-medium text-[11px] group-hover:text-[#C44128] transition-colors">Info@kanooz.com</span>
+                        <span class="text-slate-600 font-medium text-[11px] hover:text-[#C44128] transition-colors">Info@kanooz.com</span>
                     </a>
 
                     <a href="tel:+96692000043" class="flex items-center gap-2 group">
                         <i data-lucide="phone" class="w-3.5 h-3.5" style="color: #2A3478;"></i>
-                        <span class="text-slate-600 font-medium text-[11px] group-hover:text-[#2A3478] transition-colors">+966 92000043</span>
+                        <span class="text-slate-600 font-medium text-[11px] hover:text-[#2A3478] transition-colors">+966 92000043</span>
                     </a>
                 </div>
 
-                <!-- Copyright & Logo -->
                 <div class="flex items-center gap-6">
                     <div class="flex items-center gap-3">
                         <p class="text-slate-400 text-[10px] font-medium select-none">
@@ -403,110 +506,120 @@
                             v2.0.0
                         </span>
                     </div>
-                    <a href="https://kanoozcp.github.io/kcpra/" target="_blank" rel="noopener noreferrer" class="inline-block" title="Kanooz">
-                        <img src="https://kanooz.com/wp-content/uploads/2026/05/KANOOZ-LOGO-2026-transparent-color-2048x331.avif" alt="Kanooz" class="h-6 md:h-7 w-auto max-w-[140px] md:max-w-[170px] object-contain opacity-75 hover:opacity-100 transition-opacity">
+                    <a 
+                        href="https://kanoozcp.github.io/kcpra/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        class="inline-block"
+                        title="Kanooz"
+                    >
+                        <img 
+                            src="https://kanooz.com/wp-content/uploads/2026/05/KANOOZ-LOGO-2026-transparent-color-2048x331.avif" 
+                            alt="Kanooz" 
+                            class="h-6 md:h-7 w-auto max-w-[140px] md:max-w-[170px] object-contain opacity-75 hover:opacity-100 transition-opacity"
+                        >
                     </a>
                 </div>
             </div>
         </div>
     </footer>
 
+    <!-- Interactive Search & Filter Script -->
     <script>
-        // Initialize Lucide Icons
-        lucide.createIcons();
-
-        // Search functionality
         const searchInput = document.getElementById('searchInput');
         const clearSearch = document.getElementById('clearSearch');
-        const formatCards = document.querySelectorAll('.format-card');
+        const rows = document.querySelectorAll('.format-row');
         const emptyState = document.getElementById('emptyState');
-        const cardsContainer = document.getElementById('cardsContainer');
+        const resetFiltersBtn = document.getElementById('resetFiltersBtn');
+        const catPills = document.querySelectorAll('.cat-pill');
 
-        searchInput.addEventListener('input', (e) => {
-            const query = e.target.value.toLowerCase().trim();
-            let matches = 0;
+        let currentCategory = 'all';
+
+        function applyFilters() {
+            const query = searchInput.value.toLowerCase().trim();
+            let visibleCount = 0;
 
             if (query.length > 0) {
-                clearSearch.classList.remove('hidden');
+                clearSearch.style.display = 'flex';
             } else {
-                clearSearch.classList.add('hidden');
+                clearSearch.style.display = 'none';
             }
 
-            formatCards.forEach(card => {
-                const titleText = card.querySelector('h3').textContent.toLowerCase();
-                const descText = card.querySelector('p').textContent.toLowerCase();
-                
-                if (titleText.includes(query) || descText.includes(query)) {
-                    card.classList.remove('hidden');
-                    card.classList.add('flex');
-                    matches++;
+            rows.forEach(row => {
+                const title = (row.getAttribute('data-title') || '').toLowerCase();
+                const desc = (row.getAttribute('data-desc') || '').toLowerCase();
+                const category = row.getAttribute('data-category') || '';
+
+                const matchesQuery = query === '' || title.includes(query) || desc.includes(query) || category.toLowerCase().includes(query);
+                const matchesCat = currentCategory === 'all' || category === currentCategory;
+
+                if (matchesQuery && matchesCat) {
+                    row.style.display = 'flex';
+                    visibleCount++;
                 } else {
-                    card.classList.add('hidden');
-                    card.classList.remove('flex');
+                    row.style.display = 'none';
                 }
             });
 
-            if (matches === 0) {
-                emptyState.classList.remove('hidden');
-                emptyState.classList.add('flex');
-                cardsContainer.classList.add('hidden');
+            if (visibleCount === 0) {
+                emptyState.style.display = 'flex';
             } else {
-                emptyState.classList.add('hidden');
-                emptyState.classList.remove('flex');
-                cardsContainer.classList.remove('hidden');
+                emptyState.style.display = 'none';
             }
-        });
+        }
+
+        searchInput.addEventListener('input', applyFilters);
 
         clearSearch.addEventListener('click', () => {
             searchInput.value = '';
-            clearSearch.classList.add('hidden');
-            emptyState.classList.add('hidden');
-            emptyState.classList.remove('flex');
-            cardsContainer.classList.remove('hidden');
-            formatCards.forEach(card => {
-                card.classList.remove('hidden');
-                card.classList.add('flex');
-            });
+            applyFilters();
             searchInput.focus();
         });
 
-        // Card Loading Simulation
-        const buttons = document.querySelectorAll('.format-card a');
-        buttons.forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                // We let standard link click happen, but add some hover/click feedback
-                const icon = btn.querySelector('i');
-                if (icon) {
-                    icon.classList.add('animate-spin');
-                    setTimeout(() => {
-                        icon.classList.remove('animate-spin');
-                    }, 1000);
-                }
+        catPills.forEach(pill => {
+            pill.addEventListener('click', () => {
+                catPills.forEach(p => {
+                    p.classList.remove('bg-[#2A3478]', 'text-white', 'shadow-sm', 'shadow-[#2A3478]/25', 'scale-[1.02]');
+                    p.classList.add('bg-white/80', 'text-slate-600', 'border', 'border-slate-200/80');
+                });
+                pill.classList.remove('bg-white/80', 'text-slate-600', 'border', 'border-slate-200/80');
+                pill.classList.add('bg-[#2A3478]', 'text-white', 'shadow-sm', 'shadow-[#2A3478]/25', 'scale-[1.02]');
+
+                currentCategory = pill.getAttribute('data-cat');
+                applyFilters();
             });
         });
 
-        // Header scroll effect
-        let lastScroll = 0;
-        const header = document.getElementById('mainHeader');
-
-        window.addEventListener('scroll', () => {
-            const currentScroll = window.pageYOffset;
-            if (currentScroll <= 0) {
-                header.classList.remove('header-hidden');
-                return;
-            }
-
-            if (currentScroll > lastScroll && !header.classList.contains('header-hidden')) {
-                // Scroll down
-                header.classList.add('header-hidden');
-            } else if (currentScroll < lastScroll && header.classList.contains('header-hidden')) {
-                // Scroll up
-                header.classList.remove('header-hidden');
-            }
-            lastScroll = currentScroll;
+        resetFiltersBtn.addEventListener('click', () => {
+            searchInput.value = '';
+            currentCategory = 'all';
+            catPills.forEach(p => {
+                if (p.getAttribute('data-cat') === 'all') {
+                    p.classList.add('bg-[#2A3478]', 'text-white', 'shadow-sm', 'shadow-[#2A3478]/25', 'scale-[1.02]');
+                    p.classList.remove('bg-white/80', 'text-slate-600', 'border', 'border-slate-200/80');
+                } else {
+                    p.classList.remove('bg-[#2A3478]', 'text-white', 'shadow-sm', 'shadow-[#2A3478]/25', 'scale-[1.02]');
+                    p.classList.add('bg-white/80', 'text-slate-600', 'border', 'border-slate-200/80');
+                }
+            });
+            applyFilters();
         });
+
+        // Initialize Lucide icons
+        lucide.createIcons();
     </script>
-    <script>
+
+<!-- ========================================================================= -->
+<!-- KANOOZ ASSISTANT - STANDALONE EMBED SNIPPET                              -->
+<!-- Paste this code before the closing </body> tag of any page.              -->
+<!-- Features:                                                                -->
+<!-- - Official Kanooz Logo Avatar & Launcher                                 -->
+<!-- - Translucent Frosted Glass UI                                           -->
+<!-- - Persistent Browser Memory (Saved in localStorage until cleared)        -->
+<!-- - Official Company Info & Direct Portal Links                            -->
+<!-- ========================================================================= -->
+
+<script>
 (function() {
   if (window.__kanooz_assistant_initialized__) return;
   window.__kanooz_assistant_initialized__ = true;
@@ -913,5 +1026,6 @@
   });
 })();
 </script>
+
 </body>
 </html>
